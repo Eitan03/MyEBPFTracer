@@ -43,7 +43,7 @@ static int print_pairs(struct bpf_map *map, __u64 *key, char *val, void *ctx)
 	return 0;
 }
 
-SEC("uprobe")
+SEC("uprobe.multi")
 int BPF_UPROBE(my_handler)
 {
 	struct FunctionData *function_data;

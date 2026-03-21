@@ -41,7 +41,7 @@ func main() {
 		slog.Info(fmt.Sprintf("function name: %s, function address 0x%x", s.Name, s.Address))
 	}
 
-	program, err := ebpf.LoadElfFile(*elfFile, 4952, ctx)
+	program, err := ebpf.LoadElfFile(*elfFile, 10419, ctx)
 	if err != nil {
 		slog.Error(fmt.Sprintf("error loading ebpf file: %v", err))
 		return
