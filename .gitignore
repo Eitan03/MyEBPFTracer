@@ -1,0 +1,3 @@
+cmd/ebpf/**
+!cmd/ebpf/**.c
+!cmd/ebpf/generate.go
