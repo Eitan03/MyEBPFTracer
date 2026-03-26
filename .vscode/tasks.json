@@ -10,7 +10,7 @@
             "command": "go",
             "args": [
                 "generate",
-                "./cmd/ebpf"
+                "./internal/ebpf"
             ]
         }
     ]
