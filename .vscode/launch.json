@@ -13,6 +13,14 @@
             "asRoot": true,
             "console": "integratedTerminal",
             "program": "${cwd}/main.go",
+            "args": [
+                "--file",
+                "/mnt/goTest/helloProgram/hello",
+                "--pid",
+                "13938",
+                "--format",
+                "json"
+            ],
             "env": {
                 // "GOPATH": "/mnt/MyGoTracer",
                 "CGO_ENABLED": "0"
