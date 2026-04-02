@@ -17,9 +17,11 @@
                 "--file",
                 "/mnt/goTest/helloProgram/hello",
                 "--pid",
-                "13938",
+                "3018",
+                "--package",
+                "main",
                 "--format",
-                "json"
+                "text"
             ],
             "env": {
                 // "GOPATH": "/mnt/MyGoTracer",

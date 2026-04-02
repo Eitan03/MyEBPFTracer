@@ -6,7 +6,17 @@ import (
 	"fmt"
 )
 
-func LoadGoFile(elfFilePath string) (*ElfFile, error) {
+func filterFunctionSymbols(functions []gosym.Func, filter FunctionFilter) (ret []Symbol) {
+	for _, f := range functions {
+		if filter.Package != nil && *filter.Package != f.PackageName() {
+			continue
+		}
+		ret = append(ret, Symbol{Name: f.Name, Address: f.Entry})
+	}
+	return
+}
+
+func LoadGoFile(elfFilePath string, filter FunctionFilter) (*ElfFile, error) {
 	elfFile, err := elf.Open(elfFilePath)
 	if err != nil {
 		return nil, fmt.Errorf("Error opening elf file %v: %v", elfFilePath, err)
@@ -25,11 +35,8 @@ func LoadGoFile(elfFilePath string) (*ElfFile, error) {
 		return nil, fmt.Errorf("Error creating symbol table: %v", err)
 	}
 
-	functionsSymbols := make([]Symbol, len(symTable.Funcs))
+	functionSymbols := filterFunctionSymbols(symTable.Funcs, filter)
 
-	for i, f := range symTable.Funcs {
-		functionsSymbols[i] = Symbol{Name: f.Name, Address: f.Entry}
-	}
-	return &ElfFile{FilePath: elfFilePath, Symbols: functionsSymbols, textSectionAddress: txtSection.Addr, textSectionOffset: txtSection.Offset}, nil
+	return &ElfFile{FilePath: elfFilePath, Symbols: functionSymbols, textSectionAddress: txtSection.Addr, textSectionOffset: txtSection.Offset}, nil
 
 }

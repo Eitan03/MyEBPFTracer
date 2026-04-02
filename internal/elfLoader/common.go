@@ -7,6 +7,10 @@ type ElfFile struct {
 	textSectionOffset  uint64
 }
 
+type FunctionFilter struct {
+	Package *string
+}
+
 type Symbol struct {
 	Name    string
 	Address uint64
